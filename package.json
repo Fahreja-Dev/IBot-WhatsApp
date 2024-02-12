@@ -1,0 +1,24 @@
+{
+  "name": "IBot WhatsApp",
+  "author": "Fareza Dev",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "main": "./src/run.js",
+  "type": "module",
+  "dependencies": {
+    "openai": "^4.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.23.0"
+  },
+  "scripts": {
+    "start": "node ./src/run.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "bot whatsapp",
+    "ibot whatsapp",
+    "ibot-whatsapp"
+  ]
+}
