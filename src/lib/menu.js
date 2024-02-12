@@ -1,5 +1,5 @@
 export const menu = new Set([
-    ".menu",
+    ".help",
     ".ai",
     ".owner"
 ]);
