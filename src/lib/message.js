@@ -1,7 +1,7 @@
 import { openAI } from "./system/openAi.js";
 
 export const SelectedMenu = {
-  menu: function (message) {
+  help: function (message) {
     if (message.length === 0) {
       return (
         "==========MENU=========\n" +
