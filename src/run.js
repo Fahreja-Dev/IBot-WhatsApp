@@ -3,6 +3,7 @@ import { SelectedMenu } from "./lib/message.js";
 import { filtersMessage } from "./lib/system/filterMessage.js";
 import qrcode from "qrcode-terminal";
 import { Client } from "whatsapp-web.js";
+import { formatMessage } from "./lib/system/formatMessage.js";
 
 const client = new Client({
   puppeteer: {
@@ -32,7 +33,9 @@ client.on("message", async (message) => {
       : message._data.from.replace("@c.us", "");
 
   console.log(
-    `\x1b[36m[ ${message._data.notifyName} ] \x1b[35m${phoneNumber} => \x1b[33m${message.body} \x1b[37m`
+    `\x1b[36m[ ${message.deviceType} ][ ${
+      message._data.notifyName
+    } ] \x1b[35m${phoneNumber} => \x1b[33m${formatMessage(message)} \x1b[37m`
   );
 
   if (
@@ -45,7 +48,6 @@ client.on("message", async (message) => {
       const outputMessage = await SelectedMenu[filterMessage.keyMessage](
         filterMessage.message
       );
-
       await message.reply(outputMessage);
       await message.react("✅");
     } catch (error) {
