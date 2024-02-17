@@ -20,6 +20,8 @@ export function formatMessage(message) {
     return `Telah Mengirim Video [size: ${sizeFile(message._data.size)}]`;
   } else if (message.type === "audio") {
     return `Telah Mengirim Audio [size: ${sizeFile(message._data.size)}]`;
+  } else if (message.type === "ptt") {
+    return `Telah Mengirim Voice Note [size: ${sizeFile(message._data.size)}]`;
   } else {
     return message.body;
   }
