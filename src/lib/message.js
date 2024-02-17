@@ -15,8 +15,13 @@ export const SelectedMenu = {
   },
 
   ai: async function (message) {
-    let ai = await openAI(message);
-    return ai;
+    if (message[0]) {
+      let ai = await openAI(message[1], message[0]);
+      return ai;
+    } else {
+      let ai = await openAI(message[1]);
+      return ai;
+    }
   },
 
   owner: function (message) {
