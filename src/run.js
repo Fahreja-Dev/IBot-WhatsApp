@@ -4,6 +4,8 @@ import { filtersMessage } from "./lib/system/filterMessage.js";
 import qrcode from "qrcode-terminal";
 import { Client } from "whatsapp-web.js";
 import { formatMessage } from "./lib/system/formatMessage.js";
+import { multiApiOpenAi } from "./multiApi.js";
+import { manageBot } from "./config.js";
 
 const client = new Client({
   puppeteer: {
@@ -20,6 +22,8 @@ client.on("ready", () => {
   console.log("\nBerhasil terhubung WhatsApp!\n\n");
   console.log("History :\n");
 });
+
+let number = 0;
 
 client.on("message", async (message) => {
   const filterMessage =
@@ -45,9 +49,21 @@ client.on("message", async (message) => {
     await message.react("⏳");
 
     try {
-      const outputMessage = await SelectedMenu[filterMessage.keyMessage](
-        filterMessage.message
-      );
+      if (filterMessage.keyMessage === "ai" && manageBot.multiApiKey) {
+        if (number === Object.values(multiApiOpenAi).length) {
+          number = 0;
+        }
+        number++;
+      }
+
+      const outputMessage =
+        filterMessage.keyMessage === "ai" && manageBot.multiApiKey
+          ? await SelectedMenu[filterMessage.keyMessage]([
+              number,
+              filterMessage.message,
+            ])
+          : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
+
       await message.reply(outputMessage);
       await message.react("✅");
     } catch (error) {
