@@ -6,6 +6,10 @@ import { Client } from "whatsapp-web.js";
 import { formatMessage } from "./lib/system/formatMessage.js";
 import { multiApiOpenAi } from "./multiApi.js";
 import { manageBot } from "./config.js";
+import messageMedia from "whatsapp-web.js";
+import { sticker } from "./lib/system/sticker.js";
+
+const { MessageMedia } = messageMedia;
 
 const client = new Client({
   puppeteer: {
@@ -62,10 +66,27 @@ client.on("message", async (message) => {
               number,
               filterMessage.message,
             ])
+          : filterMessage.keyMessage === "sticker"
+          ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
           : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
-      await message.reply(outputMessage);
-      await message.react("✅");
+      if (filterMessage.keyMessage === "sticker" && message.type === "image") {
+        const mediaFile = await message.downloadMedia();
+        const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
+        await sticker(filterMessage.message, message, media, outputMessage);
+      } else {
+        await message.reply(outputMessage);
+      }
+
+      if (filterMessage.keyMessage === "sticker") {
+        if (message.type === "image") {
+          await message.react("✅");
+        } else {
+          await message.react("❌");
+        }
+      } else {
+        await message.react("✅");
+      }
     } catch (error) {
       console.log(
         `\x1b[36m[ ${message._data.notifyName} ] \x1b[35m${phoneNumber} => \x1b[33mPesan Telah Di Hapus! \x1b[37m`
