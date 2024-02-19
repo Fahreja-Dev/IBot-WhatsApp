@@ -7,6 +7,7 @@ export const SelectedMenu = {
         "==========MENU=========\n" +
         ".owner = Pembuat Bot\n" +
         ".ai = OpenAI\n" +
+        ".sticker = Membuat Sticker\n" +
         ".img = Coming Soon\n" +
         ".imganime = Coming Soon\n" +
         "_________________________________"
@@ -32,6 +33,18 @@ export const SelectedMenu = {
         "Kontak : *081219859098*\n" +
         "_________________________________"
       );
+    }
+  },
+
+  sticker: function (message) {
+    if (message.length === 0) {
+      const object = {
+        sendMediaAsSticker: true,
+        stickerAuthor: "Fahreja Dev",
+        stickerName: "IBot WhatsApp",
+      };
+
+      return object;
     }
   },
 };
