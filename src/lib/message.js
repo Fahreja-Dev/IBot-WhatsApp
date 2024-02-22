@@ -1,4 +1,5 @@
 import { openAI } from "./system/openAi.js";
+import { geminiAI } from "./system/geminiAi.js";
 
 export const SelectedMenu = {
   help: function (message) {
@@ -7,6 +8,7 @@ export const SelectedMenu = {
         "==========MENU=========\n" +
         ".owner = Pembuat Bot\n" +
         ".ai = OpenAI\n" +
+        ".gemini = GeminiAI\n" +
         ".sticker = Membuat Sticker\n" +
         ".img = Coming Soon\n" +
         ".imganime = Coming Soon\n" +
@@ -22,6 +24,16 @@ export const SelectedMenu = {
     } else {
       let ai = await openAI(message[1]);
       return ai;
+    }
+  },
+
+  gemini: async function (message) {
+    if (message[0]) {
+      let gemini = await geminiAI(message[1], message[0]);
+      return gemini;
+    } else {
+      let gemini = await geminiAI(message[1]);
+      return gemini;
     }
   },
 
