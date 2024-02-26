@@ -16,15 +16,15 @@ sudo apt install -y gconf-service libgbm-dev libasound2 libatk1.0-0 libc6 libcai
 ```
 apt install curl
 ```
-4. untuk install nodejs silahkan ketik perintah :
+4. Untuk install nodejs silahkan ketik perintah :
 ```
 apt install nodejs
 ```
-5. cek versi nodejs kamu, dengan ketik perintah :
+5. Cek versi nodejs kamu, dengan ketik perintah :
 ```
 node -v
 ```
-6. jika versi nodejs kamu dibawah v20.10.0 silahkan upgrade versinya, untuk mendapatkan versi nodejs v20.10.0 lts kamu bisa jalankan perintah :
+6. Jika versi nodejs kamu dibawah v20.10.0 silahkan upgrade versinya, untuk mendapatkan versi nodejs v20.10.0 lts kamu bisa jalankan perintah :
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
@@ -36,7 +36,7 @@ source ~/.bashrc
 ```
 nvm install v20.10.0
 ```
-9. install git untuk mengambil source pada bot-whatsapp, ketik perintah :
+9. Install git untuk mengambil source pada bot-whatsapp, ketik perintah :
 ```
 apt install git
 ```
@@ -44,7 +44,7 @@ apt install git
 ```
 git clone https://github.com/Fahreja-Dev/IBot-WhatsApp
 ```
-11. untuk menuju direktori bot nya, ketik perintah :
+11. Untuk menuju direktori bot nya, ketik perintah :
 ```
 cd IBot-WhatsApp
 ```
@@ -52,11 +52,11 @@ cd IBot-WhatsApp
 ```
 apt install npm
 ```
-13. untuk install module untuk kebutuhan bot-whatsapp nya, ketik perintah :
+13. Untuk install module untuk kebutuhan bot-whatsapp nya, ketik perintah :
 ```
 npm install
 ```
-14. untuk menjalankan bot nya, silahkan ketik perintah :
+14. Untuk menjalankan bot nya, silahkan ketik perintah :
 ```
 npm start
 ```
