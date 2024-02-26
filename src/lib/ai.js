@@ -8,4 +8,5 @@ export const listAi = {
 export const listObjectAi = {
   ai: multiApiOpenAi,
   gemini: multiApiGeminiAi,
+  imgGemini: multiApiGeminiAi,
 };
