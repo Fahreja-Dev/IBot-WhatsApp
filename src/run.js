@@ -88,21 +88,21 @@ client.on("message", async (message) => {
       if (filterMessage.keyMessage === "sticker" && message.type === "image") {
         const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
         await sticker(filterMessage.message, message, media, outputMessage);
-      } else {
-        if (
-          filterMessage.keyMessage === "sticker" ||
-          filterMessage.keyMessage === "imgGemini"
-        ) {
-          if (message.type === "image") {
-            await message.reply(outputMessage);
-            await message.react("✅");
-          } else {
-            await message.react("❌");
-          }
-        } else {
+      }
+
+      if (
+        filterMessage.keyMessage === "sticker" ||
+        filterMessage.keyMessage === "imgGemini"
+      ) {
+        if (message.type === "image") {
           await message.reply(outputMessage);
           await message.react("✅");
+        } else {
+          await message.react("❌");
         }
+      } else {
+        await message.reply(outputMessage);
+        await message.react("✅");
       }
     } catch (error) {
       console.log(
