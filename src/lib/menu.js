@@ -1,7 +1,8 @@
 export const menu = new Set([
-    ".help",
-    ".ai",
-    ".gemini",
-    ".owner",
-    ".sticker"
+  ".help",
+  ".ai",
+  ".gemini",
+  ".imgGemini",
+  ".owner",
+  ".sticker",
 ]);
