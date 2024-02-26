@@ -53,8 +53,9 @@ client.on("message", async (message) => {
     await message.react("⏳");
 
     try {
+      const mediaFile = await message.downloadMedia();
       if (
-        filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
+        listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
         manageBot.multiApiKey
       ) {
         if (
@@ -73,26 +74,35 @@ client.on("message", async (message) => {
               number,
               filterMessage.message,
             ])
+          : filterMessage.keyMessage === "imgGemini" && message.type === "image"
+          ? await SelectedMenu[filterMessage.keyMessage](
+              filterMessage.message,
+              mediaFile.data,
+              mediaFile.mimetype,
+              number
+            )
           : filterMessage.keyMessage === "sticker"
           ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
           : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
       if (filterMessage.keyMessage === "sticker" && message.type === "image") {
-        const mediaFile = await message.downloadMedia();
         const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
         await sticker(filterMessage.message, message, media, outputMessage);
       } else {
-        await message.reply(outputMessage);
-      }
-
-      if (filterMessage.keyMessage === "sticker") {
-        if (message.type === "image") {
-          await message.react("✅");
+        if (
+          filterMessage.keyMessage === "sticker" ||
+          filterMessage.keyMessage === "imgGemini"
+        ) {
+          if (message.type === "image") {
+            await message.reply(outputMessage);
+            await message.react("✅");
+          } else {
+            await message.react("❌");
+          }
         } else {
-          await message.react("❌");
+          await message.reply(outputMessage);
+          await message.react("✅");
         }
-      } else {
-        await message.react("✅");
       }
     } catch (error) {
       console.log(
