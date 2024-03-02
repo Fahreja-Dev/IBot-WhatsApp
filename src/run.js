@@ -8,6 +8,7 @@ import { manageBot } from "./config.js";
 import messageMedia from "whatsapp-web.js";
 import { sticker } from "./lib/system/sticker.js";
 import { listAi, listObjectAi } from "./lib/ai.js";
+import { IBotMp3 } from "./lib/system/ytmp3.js";
 
 const { MessageMedia } = messageMedia;
 
@@ -88,6 +89,8 @@ client.on("message", async (message) => {
       if (filterMessage.keyMessage === "sticker" && message.type === "image") {
         const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
         await sticker(filterMessage.message, message, media, outputMessage);
+      } else if (filterMessage.keyMessage === "ytmp3") {
+        await IBotMp3(message, filterMessage.message, outputMessage);
       }
 
       if (
