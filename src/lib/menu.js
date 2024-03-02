@@ -5,4 +5,5 @@ export const menu = new Set([
   ".imgGemini",
   ".owner",
   ".sticker",
+  ".ytmp3",
 ]);
