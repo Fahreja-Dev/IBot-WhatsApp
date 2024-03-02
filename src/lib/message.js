@@ -12,7 +12,7 @@ export const SelectedMenu = {
         ".gemini = GeminiAI\n" +
         ".imgGemini = GeminiAI Mengenali Objek Gambar\n" +
         ".sticker = Membuat Sticker\n" +
-        ".img = Coming Soon\n" +
+        ".ytmp3 = Convert video ke MP3 (Dari Youtube)" +
         ".imganime = Coming Soon\n" +
         "_________________________________"
       );
@@ -75,6 +75,14 @@ export const SelectedMenu = {
         stickerName: "IBot WhatsApp",
       };
 
+      return object;
+    }
+  },
+  ytmp3: function (message) {
+    if (message.length !== 0) {
+      let object = {
+        sendMediaAsDocument: true,
+      };
       return object;
     }
   },
