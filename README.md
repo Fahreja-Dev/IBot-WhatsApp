@@ -72,7 +72,7 @@ Fitur yang tersedia pada IBot-WhatsApp
 | GeminiAI              |:white_check_mark:|
 | ImageGeminiAI         |:white_check_mark:|
 | Sticker               |:white_check_mark:|
-| Youtube convert MP3   |:x:               |
+| Youtube convert MP3   |:white_check_mark:|
 | Youtube convert MP4   |:x:               |
 
 
