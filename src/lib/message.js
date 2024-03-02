@@ -12,7 +12,7 @@ export const SelectedMenu = {
         ".gemini = GeminiAI\n" +
         ".imgGemini = GeminiAI Mengenali Objek Gambar\n" +
         ".sticker = Membuat Sticker\n" +
-        ".ytmp3 = Convert video ke MP3 (Dari Youtube)" +
+        ".ytmp3 = Youtube Convert MP3\n" +
         ".imganime = Coming Soon\n" +
         "_________________________________"
       );
