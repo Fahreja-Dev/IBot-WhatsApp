@@ -9,6 +9,7 @@ import messageMedia from "whatsapp-web.js";
 import { sticker } from "./lib/system/sticker.js";
 import { listAi, listObjectAi } from "./lib/ai.js";
 import { IBotMp3 } from "./lib/system/ytmp3.js";
+import { videoSticker } from "./lib/system/videoSticker.js";
 
 const { MessageMedia } = messageMedia;
 
@@ -53,64 +54,64 @@ client.on("message", async (message) => {
   ) {
     await message.react("⏳");
 
-    try {
-      const mediaFile = await message.downloadMedia();
+    const mediaFile = await message.downloadMedia();
+    if (
+      listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
+      manageBot.multiApiKey
+    ) {
       if (
-        listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
-        manageBot.multiApiKey
+        number === Object.values(listObjectAi[filterMessage.keyMessage]).length
       ) {
-        if (
-          number ===
-          Object.values(listObjectAi[filterMessage.keyMessage]).length
-        ) {
-          number = 0;
-        }
-        number++;
+        number = 0;
       }
+      number++;
+    }
 
-      const outputMessage =
-        filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
-        manageBot.multiApiKey
-          ? await SelectedMenu[filterMessage.keyMessage]([
-              number,
-              filterMessage.message,
-            ])
-          : filterMessage.keyMessage === "imgGemini" && message.type === "image"
-          ? await SelectedMenu[filterMessage.keyMessage](
-              filterMessage.message,
-              mediaFile.data,
-              mediaFile.mimetype,
-              number
-            )
-          : filterMessage.keyMessage === "sticker"
-          ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
-          : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
+    const outputMessage =
+      filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
+      manageBot.multiApiKey
+        ? await SelectedMenu[filterMessage.keyMessage]([
+            number,
+            filterMessage.message,
+          ])
+        : filterMessage.keyMessage === "imgGemini" && message.type === "image"
+        ? await SelectedMenu[filterMessage.keyMessage](
+            filterMessage.message,
+            mediaFile.data,
+            mediaFile.mimetype,
+            number
+          )
+        : filterMessage.keyMessage === "sticker"
+        ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
+        : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
-      if (filterMessage.keyMessage === "sticker" && message.type === "image") {
-        const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
+    if (filterMessage.keyMessage === "sticker") {
+      const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
+      if (message.type === "image") {
         await sticker(filterMessage.message, message, media, outputMessage);
-      } else if (filterMessage.keyMessage === "ytmp3") {
-        await IBotMp3(message, filterMessage.message, outputMessage);
+      } else if (message.type === "video") {
+        await videoSticker(media, message, outputMessage);
       }
+    } else if (filterMessage.keyMessage === "ytmp3") {
+      await IBotMp3(message, filterMessage.message, outputMessage);
+    }
 
-      if (
-        filterMessage.keyMessage === "sticker" ||
-        filterMessage.keyMessage === "imgGemini"
-      ) {
-        if (message.type === "image") {
-          await message.reply(outputMessage);
-          await message.react("✅");
-        } else {
-          await message.react("❌");
-        }
-      } else {
+    if (filterMessage.keyMessage === "imgGemini") {
+      if (message.type === "image") {
         await message.reply(outputMessage);
         await message.react("✅");
+      } else {
+        await message.react("❌");
       }
-    } catch (error) {
-      console.log(
-        `\x1b[36m[ ${message._data.notifyName} ] \x1b[35m${phoneNumber} => \x1b[33mPesan Telah Di Hapus! \x1b[37m`
-      );
+    } else if (filterMessage.keyMessage === "sticker") {
+      if (message.type === "image" || message.type === "video") {
+        await message.react("✅");
+      } else {
+        await message.react("❌");
+      }
+    } else {
+      await message.reply(outputMessage);
+      await message.react("✅");
     }
   }
 });
