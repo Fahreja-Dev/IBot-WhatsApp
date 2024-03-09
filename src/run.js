@@ -32,30 +32,28 @@ client.on("ready", () => {
 let number = 0;
 
 client.on("message", async (message) => {
-  try {
-    const filterMessage =
-      filtersMessage(message.body, menu) !== undefined
-        ? filtersMessage(message.body, menu)
-        : false;
+  const filterMessage =
+    filtersMessage(message.body, menu) !== undefined
+      ? filtersMessage(message.body, menu)
+      : false;
 
-    const phoneNumber =
-      typeof message._data.id.participant === "string"
-        ? message._data.id.participant.replace("@c.us", "")
-        : message._data.from.replace("@c.us", "");
+  const phoneNumber =
+    typeof message._data.id.participant === "string"
+      ? message._data.id.participant.replace("@c.us", "")
+      : message._data.from.replace("@c.us", "");
 
-    console.log(
-      `\x1b[36m[ ${message.deviceType} ][ ${
-        message._data.notifyName
-      } ] \x1b[35m${phoneNumber} => \x1b[33m${formatMessage(message)} \x1b[37m`
-    );
+  console.log(
+    `\x1b[36m[ ${message.deviceType} ][ ${
+      message._data.notifyName
+    } ] \x1b[35m${phoneNumber} => \x1b[33m${formatMessage(message)} \x1b[37m`
+  );
 
-    if (
-      SelectedMenu.hasOwnProperty(filterMessage.keyMessage) &&
-      SelectedMenu[filterMessage.keyMessage](filterMessage.message) !==
-        undefined
-    ) {
-      await message.react("⏳");
-
+  if (
+    SelectedMenu.hasOwnProperty(filterMessage.keyMessage) &&
+    SelectedMenu[filterMessage.keyMessage](filterMessage.message) !== undefined
+  ) {
+    await message.react("⏳");
+    try {
       const mediaFile = await message.downloadMedia();
       if (
         listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
@@ -116,11 +114,11 @@ client.on("message", async (message) => {
         await message.reply(outputMessage);
         await message.react("✅");
       }
+    } catch (error) {
+      console.log(
+        `\x1b[36m[ ${message._data.notifyName} ] \x1b[35m${phoneNumber} => \x1b[33mPesan Telah Di Hapus! \x1b[37m`
+      );
     }
-  } catch (err) {
-    console.log(
-      `\x1b[36m[ ${message.deviceType} ][ ${message._data.notifyName} ] \x1b[35m${phoneNumber} => \x1b[33mPesan Telah Di Hapus! \x1b[37m`
-    );
   }
 });
 
