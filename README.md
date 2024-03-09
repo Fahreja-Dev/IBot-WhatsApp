@@ -12,55 +12,59 @@ apt update && apt upgrade
 ```
 sudo apt install -y gconf-service libgbm-dev libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 ```
-3. Install CURL untuk kebutuhan upgrade versi nodejs & lainnya ketik perintah :
+3. Install FFMPEG untuk kebutuhan fitur IBot-WhatsApp, ketik perintah :
+```
+sudo apt-get install ffmpeg
+```
+4. Install CURL untuk kebutuhan upgrade versi nodejs & lainnya ketik perintah :
 ```
 apt install curl
 ```
-4. Untuk install nodejs silahkan ketik perintah :
+5. Untuk install nodejs silahkan ketik perintah :
 ```
 apt install nodejs
 ```
-5. Cek versi nodejs kamu, dengan ketik perintah :
+6. Cek versi nodejs kamu, dengan ketik perintah :
 ```
 node -v
 ```
-6. Jika versi nodejs kamu dibawah v20.10.0 silahkan upgrade versinya, untuk mendapatkan versi nodejs v20.10.0 lts kamu bisa jalankan perintah :
+7. Jika versi nodejs kamu dibawah v20.10.0 silahkan upgrade versinya, untuk mendapatkan versi nodejs v20.10.0 lts kamu bisa jalankan perintah :
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
-7. Agar perintah nvm bisa digunakan ketik perintah :
+8. Agar perintah nvm bisa digunakan ketik perintah :
 ```
 source ~/.bashrc
 ```
-8. Untuk install nodejs v20.10.0 LTS nya, ketik perintah :
+9. Untuk install nodejs v20.10.0 LTS nya, ketik perintah :
 ```
 nvm install v20.10.0
 ```
-9. Install git untuk mengambil source pada bot-whatsapp, ketik perintah :
+10. Install git untuk mengambil source pada bot-whatsapp, ketik perintah :
 ```
 apt install git
 ```
-10. Untuk mengambil source bot-whatsapp nya, ketik perintah :
+11. Untuk mengambil source bot-whatsapp nya, ketik perintah :
 ```
 git clone https://github.com/Fahreja-Dev/IBot-WhatsApp
 ```
-11. Untuk menuju direktori bot nya, ketik perintah :
+12. Untuk menuju direktori bot nya, ketik perintah :
 ```
 cd IBot-WhatsApp
 ```
-12. Agar npm nya bisa kita gunakan, ketik perintah :
+13. Agar npm nya bisa kita gunakan, ketik perintah :
 ```
 apt install npm
 ```
-13. Untuk install module untuk kebutuhan bot-whatsapp nya, ketik perintah :
+14. Untuk install module untuk kebutuhan bot-whatsapp nya, ketik perintah :
 ```
 npm install
 ```
-14. Untuk menjalankan bot nya, silahkan ketik perintah :
+15. Untuk menjalankan bot nya, silahkan ketik perintah :
 ```
 npm start
 ```
-15. Scan kode QR pada whatsapp yang mau dijadikan bot-whatsapp
+16. Scan kode QR pada whatsapp yang mau dijadikan bot-whatsapp
 
 ## Fitur
 
@@ -71,7 +75,8 @@ Fitur yang tersedia pada IBot-WhatsApp
 | OpenAI                |:white_check_mark:|
 | GeminiAI              |:white_check_mark:|
 | ImageGeminiAI         |:white_check_mark:|
-| Sticker               |:white_check_mark:|
+| Image convert Sticker |:white_check_mark:|
+| Video convert Sticker |:white_check_mark:|
 | Youtube convert MP3   |:white_check_mark:|
 | Youtube convert MP4   |:x:               |
 
