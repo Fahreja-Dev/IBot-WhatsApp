@@ -1,6 +1,6 @@
 # IBot-WhatsApp
 IBot-WhatsApp adalah sebuah bot whatsapp, yang bertujuan mempermudah anda untuk mencari informasi atau layanan lainnya.
-IBot-Whatsapp menggunakan library [whatsapp-web.js](https://wwebjs.dev/) yang berjalan menggunakan Puppeteer. Dan library [whatsapp-web.js](https://wwebjs.dev/) tersebut sudah didukung oleh WhatsApp secara resmi.
+IBot-Whatsapp menggunakan library [whatsapp-web.js](https://wwebjs.dev/) yang berjalan menggunakan Puppeteer. Dan library [whatsapp-web.js](https://wwebjs.dev/) tersebut tidak berafiliasi, terkait, diotorisasi, maupun didukung oleh dengan cara apapun yang secara resmi terhubung dengan [WhatsApp](https://www.whatsapp.com/).
 
 ## Panduan Instalasi
 Untuk bagi yang menggunakan Linux Ubuntu :
