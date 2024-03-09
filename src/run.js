@@ -32,87 +32,95 @@ client.on("ready", () => {
 let number = 0;
 
 client.on("message", async (message) => {
-  const filterMessage =
-    filtersMessage(message.body, menu) !== undefined
-      ? filtersMessage(message.body, menu)
-      : false;
+  try {
+    const filterMessage =
+      filtersMessage(message.body, menu) !== undefined
+        ? filtersMessage(message.body, menu)
+        : false;
 
-  const phoneNumber =
-    typeof message._data.id.participant === "string"
-      ? message._data.id.participant.replace("@c.us", "")
-      : message._data.from.replace("@c.us", "");
+    const phoneNumber =
+      typeof message._data.id.participant === "string"
+        ? message._data.id.participant.replace("@c.us", "")
+        : message._data.from.replace("@c.us", "");
 
-  console.log(
-    `\x1b[36m[ ${message.deviceType} ][ ${
-      message._data.notifyName
-    } ] \x1b[35m${phoneNumber} => \x1b[33m${formatMessage(message)} \x1b[37m`
-  );
+    console.log(
+      `\x1b[36m[ ${message.deviceType} ][ ${
+        message._data.notifyName
+      } ] \x1b[35m${phoneNumber} => \x1b[33m${formatMessage(message)} \x1b[37m`
+    );
 
-  if (
-    SelectedMenu.hasOwnProperty(filterMessage.keyMessage) &&
-    SelectedMenu[filterMessage.keyMessage](filterMessage.message) !== undefined
-  ) {
-    await message.react("⏳");
-
-    const mediaFile = await message.downloadMedia();
     if (
-      listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
-      manageBot.multiApiKey
+      SelectedMenu.hasOwnProperty(filterMessage.keyMessage) &&
+      SelectedMenu[filterMessage.keyMessage](filterMessage.message) !==
+        undefined
     ) {
+      await message.react("⏳");
+
+      const mediaFile = await message.downloadMedia();
       if (
-        number === Object.values(listObjectAi[filterMessage.keyMessage]).length
+        listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
+        manageBot.multiApiKey
       ) {
-        number = 0;
+        if (
+          number ===
+          Object.values(listObjectAi[filterMessage.keyMessage]).length
+        ) {
+          number = 0;
+        }
+        number++;
       }
-      number++;
-    }
 
-    const outputMessage =
-      filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
-      manageBot.multiApiKey
-        ? await SelectedMenu[filterMessage.keyMessage]([
-            number,
-            filterMessage.message,
-          ])
-        : filterMessage.keyMessage === "imgGemini" && message.type === "image"
-        ? await SelectedMenu[filterMessage.keyMessage](
-            filterMessage.message,
-            mediaFile.data,
-            mediaFile.mimetype,
-            number
-          )
-        : filterMessage.keyMessage === "sticker"
-        ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
-        : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
+      const outputMessage =
+        filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
+        manageBot.multiApiKey
+          ? await SelectedMenu[filterMessage.keyMessage]([
+              number,
+              filterMessage.message,
+            ])
+          : filterMessage.keyMessage === "imgGemini" && message.type === "image"
+          ? await SelectedMenu[filterMessage.keyMessage](
+              filterMessage.message,
+              mediaFile.data,
+              mediaFile.mimetype,
+              number
+            )
+          : filterMessage.keyMessage === "sticker"
+          ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
+          : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
-    if (filterMessage.keyMessage === "sticker") {
-      const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
-      if (message.type === "image") {
-        await sticker(filterMessage.message, message, media, outputMessage);
-      } else if (message.type === "video") {
-        await videoSticker(media, message, outputMessage);
+      if (filterMessage.keyMessage === "sticker") {
+        const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
+        if (message.type === "image") {
+          await sticker(filterMessage.message, message, media, outputMessage);
+        } else if (message.type === "video") {
+          await videoSticker(media, message, outputMessage);
+        }
+      } else if (filterMessage.keyMessage === "ytmp3") {
+        await IBotMp3(message, filterMessage.message, outputMessage);
       }
-    } else if (filterMessage.keyMessage === "ytmp3") {
-      await IBotMp3(message, filterMessage.message, outputMessage);
-    }
 
-    if (filterMessage.keyMessage === "imgGemini") {
-      if (message.type === "image") {
+      if (filterMessage.keyMessage === "imgGemini") {
+        if (message.type === "image") {
+          await message.reply(outputMessage);
+          await message.react("✅");
+        } else {
+          await message.react("❌");
+        }
+      } else if (filterMessage.keyMessage === "sticker") {
+        if (message.type === "image" || message.type === "video") {
+          await message.react("✅");
+        } else {
+          await message.react("❌");
+        }
+      } else {
         await message.reply(outputMessage);
         await message.react("✅");
-      } else {
-        await message.react("❌");
       }
-    } else if (filterMessage.keyMessage === "sticker") {
-      if (message.type === "image" || message.type === "video") {
-        await message.react("✅");
-      } else {
-        await message.react("❌");
-      }
-    } else {
-      await message.reply(outputMessage);
-      await message.react("✅");
     }
+  } catch (err) {
+    console.log(
+      `\x1b[36m[ ${message.deviceType} ][ ${message._data.notifyName} ] \x1b[35m${phoneNumber} => \x1b[33mPesan Telah Di Hapus! \x1b[37m`
+    );
   }
 });
 
