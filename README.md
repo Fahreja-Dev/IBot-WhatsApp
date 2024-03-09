@@ -14,7 +14,7 @@ sudo apt install -y gconf-service libgbm-dev libasound2 libatk1.0-0 libc6 libcai
 ```
 3. Install FFMPEG untuk kebutuhan fitur IBot-WhatsApp, ketik perintah :
 ```
-sudo apt-get install ffmpeg
+sudo apt-get install ffmpeg -y
 ```
 4. Install CURL untuk kebutuhan upgrade versi nodejs & lainnya ketik perintah :
 ```
