@@ -44,7 +44,7 @@ nvm install v20.10.0
 ```
 sudo apt install git
 ```
-11. Untuk mengambil source bot-whatsapp nya, ketik perintah :
+11. Untuk mengambil source IBot-WhatsApp nya, ketik perintah :
 ```
 git clone https://github.com/Fahreja-Dev/IBot-WhatsApp
 ```
@@ -52,7 +52,7 @@ git clone https://github.com/Fahreja-Dev/IBot-WhatsApp
 ```
 cd IBot-WhatsApp
 ```
-13 Install google-chrome-stable untuk kebutuhan pada fitur IBot-WhatsApp nya, ketik perintah :
+13. Install google-chrome-stable untuk kebutuhan pada fitur IBot-WhatsApp nya, ketik perintah :
 ```
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 ```
