@@ -40,7 +40,7 @@ source ~/.bashrc
 ```
 nvm install v20.10.0
 ```
-10. Install git untuk mengambil source pada bot-whatsapp, ketik perintah :
+10. Install git untuk mengambil source pada IBot-WhatsApp, ketik perintah :
 ```
 sudo apt install git
 ```
@@ -52,19 +52,27 @@ git clone https://github.com/Fahreja-Dev/IBot-WhatsApp
 ```
 cd IBot-WhatsApp
 ```
-13. Agar npm nya bisa kita gunakan, ketik perintah :
+13 Install google-chrome-stable untuk kebutuhan pada fitur IBot-WhatsApp nya, ketik perintah :
+```
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+```
+14. Untuk install google-chrome-stable, ketik perintah :
+```
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+```
+15. Agar npm nya bisa kita gunakan, ketik perintah :
 ```
 sudo apt install npm
 ```
-14. Untuk install module untuk kebutuhan bot-whatsapp nya, ketik perintah :
+16. Untuk install module untuk kebutuhan IBot-WhatsApp nya, ketik perintah :
 ```
 npm install
 ```
-15. Untuk menjalankan bot nya, silahkan ketik perintah :
+17. Untuk menjalankan bot nya, silahkan ketik perintah :
 ```
 npm start
 ```
-16. Scan kode QR pada whatsapp yang mau dijadikan bot-whatsapp
+18. Scan kode QR pada whatsapp yang mau dijadikan bot-whatsapp
 
 ## Fitur
 
