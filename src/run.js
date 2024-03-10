@@ -15,6 +15,7 @@ const { MessageMedia } = messageMedia;
 
 const client = new Client({
   puppeteer: {
+    executablePath: '/usr/bin/google-chrome-stable',
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   },
 });
@@ -43,8 +44,7 @@ client.on("message", async (message) => {
       : message._data.from.replace("@c.us", "");
 
   console.log(
-    `\x1b[36m[ ${message.deviceType} ][ ${
-      message._data.notifyName
+    `\x1b[36m[ ${message.deviceType} ][ ${message._data.notifyName
     } ] \x1b[35m${phoneNumber} => \x1b[33m${formatMessage(message)} \x1b[37m`
   );
 
@@ -70,21 +70,21 @@ client.on("message", async (message) => {
 
       const outputMessage =
         filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
-        manageBot.multiApiKey
+          manageBot.multiApiKey
           ? await SelectedMenu[filterMessage.keyMessage]([
-              number,
-              filterMessage.message,
-            ])
+            number,
+            filterMessage.message,
+          ])
           : filterMessage.keyMessage === "imgGemini" && message.type === "image"
-          ? await SelectedMenu[filterMessage.keyMessage](
+            ? await SelectedMenu[filterMessage.keyMessage](
               filterMessage.message,
               mediaFile.data,
               mediaFile.mimetype,
               number
             )
-          : filterMessage.keyMessage === "sticker"
-          ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
-          : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
+            : filterMessage.keyMessage === "sticker"
+              ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
+              : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
       if (filterMessage.keyMessage === "sticker") {
         const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
