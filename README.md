@@ -6,7 +6,7 @@ IBot-Whatsapp menggunakan library [whatsapp-web.js](https://wwebjs.dev/) yang be
 Untuk bagi yang menggunakan Linux Ubuntu :
 1. Agar penginstalan paket bekerja, silahkan ketik perintah :
 ```
-apt update && apt upgrade
+sudo apt update && sudo apt upgrade
 ```
 2. Install dependencies nya, ketik perintah :
 ```
@@ -18,11 +18,11 @@ sudo apt-get install ffmpeg -y
 ```
 4. Install CURL untuk kebutuhan upgrade versi nodejs & lainnya ketik perintah :
 ```
-apt install curl
+sudo apt install curl
 ```
 5. Untuk install nodejs silahkan ketik perintah :
 ```
-apt install nodejs
+sudo apt install nodejs
 ```
 6. Cek versi nodejs kamu, dengan ketik perintah :
 ```
@@ -42,7 +42,7 @@ nvm install v20.10.0
 ```
 10. Install git untuk mengambil source pada bot-whatsapp, ketik perintah :
 ```
-apt install git
+sudo apt install git
 ```
 11. Untuk mengambil source bot-whatsapp nya, ketik perintah :
 ```
@@ -54,7 +54,7 @@ cd IBot-WhatsApp
 ```
 13. Agar npm nya bisa kita gunakan, ketik perintah :
 ```
-apt install npm
+sudo apt install npm
 ```
 14. Untuk install module untuk kebutuhan bot-whatsapp nya, ketik perintah :
 ```
