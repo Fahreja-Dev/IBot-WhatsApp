@@ -7,4 +7,7 @@ export const manageBot = {
   /* Pengaturan Gemini AI */
   multiApiKeyGemini: true,
   apiKeyGeminiAi: "ApiKey kamu",
+  /* <====================================================================> */
+  /* Pengaturan search Image Unsplash*/
+  accessKeyUnsplash: "Access Key kamu"
 };
