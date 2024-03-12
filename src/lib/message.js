@@ -1,6 +1,7 @@
 import { openAI } from "./system/openAi.js";
 import { geminiAI } from "./system/geminiAi.js";
 import { geminiImageAi } from "./system/geminiImage.js";
+import { searchImagesUnsplash } from "./system/searchImageUnsplash.js";
 
 export const SelectedMenu = {
   help: function (message) {
@@ -84,6 +85,13 @@ export const SelectedMenu = {
         sendMediaAsDocument: true,
       };
       return object;
+    }
+  },
+  unsplash: async function (message) {
+    if (message.length !== 0) {
+      const searchImage = await searchImagesUnsplash(message)
+
+      return searchImage
     }
   },
 };
