@@ -10,6 +10,7 @@ import { sticker } from "./lib/system/sticker.js";
 import { listAi, listObjectAi } from "./lib/ai.js";
 import { IBotMp3 } from "./lib/system/ytmp3.js";
 import { videoSticker } from "./lib/system/videoSticker.js";
+import { requestUrlUnsplash } from "./lib/system/searchImageUnsplash.js";
 
 const { MessageMedia } = messageMedia;
 
@@ -95,6 +96,8 @@ client.on("message", async (message) => {
         }
       } else if (filterMessage.keyMessage === "ytmp3") {
         await IBotMp3(message, filterMessage.message, outputMessage);
+      } else if (filterMessage.keyMessage === "unsplash") {
+        await requestUrlUnsplash(message, outputMessage)
       }
 
       if (filterMessage.keyMessage === "imgGemini") {
