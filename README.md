@@ -86,6 +86,7 @@ Fitur yang tersedia pada IBot-WhatsApp
 | Image convert Sticker |:white_check_mark:|
 | Video convert Sticker |:white_check_mark:|
 | Youtube convert MP3   |:white_check_mark:|
+| Search Image Unsplash |:white_check_mark:|
 | Youtube convert MP4   |:x:               |
 
 
