@@ -14,6 +14,7 @@ export const SelectedMenu = {
         ".imgGemini = GeminiAI Mengenali Objek Gambar\n" +
         ".sticker = Membuat Sticker\n" +
         ".ytmp3 = Youtube Convert MP3\n" +
+        ".unsplash = Search Image Unsplash\n" +
         ".imganime = Coming Soon\n" +
         "_________________________________"
       );
