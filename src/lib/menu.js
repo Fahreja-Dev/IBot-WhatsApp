@@ -6,4 +6,5 @@ export const menu = new Set([
   ".owner",
   ".sticker",
   ".ytmp3",
+  ".unsplash"
 ]);
