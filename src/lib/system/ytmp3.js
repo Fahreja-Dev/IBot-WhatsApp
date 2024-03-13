@@ -47,6 +47,7 @@ async function IBotMp3Title(url) {
     penonton: infoVideo.viewCount,
     publish: filterTime(infoVideo.publishDate),
     subcriber: infoVideo.author.subscriber_count,
+    durasi: parseInt(infoVideo.lengthSeconds)
   };
 
   return IBotYoutube;
@@ -59,13 +60,15 @@ export async function IBotMp3(message, url, option) {
       base64: await base64Mp3(url),
     };
 
-    const media = new MessageMedia(
-      "audio/mpeg",
-      informationVideo.base64,
-      `${informationVideo.information.judul}.mp3`
-    );
-    await message.reply(
-      "Nama Channel: \n" +
+    if (!(informationVideo.information.durasi >= 3360)) {
+
+      const media = new MessageMedia(
+        "audio/mpeg",
+        informationVideo.base64,
+        `${informationVideo.information.judul}.mp3`
+      );
+      await message.reply(
+        "Nama Channel: \n" +
         informationVideo.information.namaBand +
         "\n\n" +
         "Judul: \n" +
@@ -83,9 +86,12 @@ export async function IBotMp3(message, url, option) {
         "\n" +
         "Tanggal: " +
         informationVideo.information.publish.tanggal
-    );
+      );
 
-    await message.reply(media, message.from, option);
+      await message.reply(media, message.from, option);
+    } else {
+      await message.reply("Batas durasi maksimal 56 menit!");
+    }
   } catch (err) {
     await message.reply("Link youtube tidak valid, silahkan periksa kembali!");
   }
