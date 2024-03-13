@@ -19,8 +19,8 @@ export async function openAI(message, number = 0) {
     let resultUser = "";
     let responseUser = await Promise.all(message);
 
-    for (const x of responseUser) {
-      resultUser += await x;
+    for await (const x of responseUser) {
+      resultUser += x;
     }
 
     const stream = await openai.chat.completions.create({
@@ -32,14 +32,14 @@ export async function openAI(message, number = 0) {
     let output = "";
 
     for await (const chunk of stream) {
-      output += (await chunk.choices[0]?.delta?.content) || "";
+      output += (chunk.choices[0]?.delta?.content) || "";
     }
 
     let outputResult = "";
     let outputResponse = await Promise.all(output);
 
     for await (const y of outputResponse) {
-      outputResult += await y;
+      outputResult += y;
     }
 
     return outputResult;
