@@ -4,19 +4,40 @@ import { geminiImageAi } from "./system/geminiImage.js";
 import { searchImagesUnsplash } from "./system/searchImageUnsplash.js";
 
 export const SelectedMenu = {
+  menu: function (message, username) {
+    if (message.length === 0) {
+      return (
+        "Halo, " + username + "\n\n" +
+        "> Jika kamu butuh bantuan dalam menggunakan Menu\n" +
+        "> Silahkan Ketik: .help\n\n" +
+        "―――――[ MENU ]―――――\n" +
+        "*.owner =* _Pembuat Bot_\n" +
+        "*.ai =* _OpenAI_\n" +
+        "*.gemini =* _GeminiAI_\n" +
+        "*.imgGemini =* _GeminiAI Mengenali Objek Gambar_\n" +
+        "*.sticker =* _Membuat Sticker_\n" +
+        "*.ytmp3 =* _Youtube Convert MP3_\n" +
+        "*.ytvoice =* _Youtube Convert Voice_\n" +
+        "*.unsplash =* _Search Image Unsplash_\n" +
+        "*.imganime =* _Coming Soon_\n" +
+        "―――――――――――――――\n"
+      );
+    }
+  },
+
   help: function (message) {
     if (message.length === 0) {
       return (
-        "==========MENU=========\n" +
-        ".owner = Pembuat Bot\n" +
-        ".ai = OpenAI\n" +
-        ".gemini = GeminiAI\n" +
-        ".imgGemini = GeminiAI Mengenali Objek Gambar\n" +
-        ".sticker = Membuat Sticker\n" +
-        ".ytmp3 = Youtube Convert MP3\n" +
-        ".unsplash = Search Image Unsplash\n" +
-        ".imganime = Coming Soon\n" +
-        "_________________________________"
+        "―――――[ HELP ]―――――\n" +
+        "*.owner =* _Teks_\n" +
+        "*.ai =* _Teks_\n" +
+        "*.gemini =* _Teks_\n" +
+        "*.imgGemini =* _Image & Teks_\n" +
+        "*.sticker =* _Image / Video / Gif_\n" +
+        "*.ytmp3 =* _Link_\n" +
+        "*.ytvoice =* _Link_\n" +
+        "*.unsplash =* _Teks_\n" +
+        "――――――――――――――\n"
       );
     }
   },
@@ -95,4 +116,12 @@ export const SelectedMenu = {
       return searchImage
     }
   },
+  ytvoice: async function (message) {
+    if (message.length !== 0) {
+      let object = {
+        sendAudioAsVoice: true,
+      };
+      return object;
+    }
+  }
 };
