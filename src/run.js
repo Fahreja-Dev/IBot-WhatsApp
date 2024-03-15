@@ -11,6 +11,7 @@ import { listAi, listObjectAi } from "./lib/ai.js";
 import { IBotMp3 } from "./lib/system/ytmp3.js";
 import { videoSticker } from "./lib/system/videoSticker.js";
 import { requestUrlUnsplash } from "./lib/system/searchImageUnsplash.js";
+import { ytVoice } from "./lib/system/ytVoice.js";
 
 const { MessageMedia } = messageMedia;
 
@@ -98,6 +99,8 @@ client.on("message", async (message) => {
         await IBotMp3(message, filterMessage.message, outputMessage);
       } else if (filterMessage.keyMessage === "unsplash") {
         await requestUrlUnsplash(message, outputMessage)
+      } else if (filterMessage.keyMessage === "ytvoice") {
+        await ytVoice(message, filterMessage.message, outputMessage)
       }
 
       if (filterMessage.keyMessage === "imgGemini") {
