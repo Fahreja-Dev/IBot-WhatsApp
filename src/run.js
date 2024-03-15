@@ -77,16 +77,17 @@ client.on("message", async (message) => {
             number,
             filterMessage.message,
           ])
-          : filterMessage.keyMessage === "imgGemini" && message.type === "image"
-            ? await SelectedMenu[filterMessage.keyMessage](
-              filterMessage.message,
-              mediaFile.data,
-              mediaFile.mimetype,
-              number
-            )
-            : filterMessage.keyMessage === "sticker"
-              ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
-              : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
+          : filterMessage.keyMessage === "menu" ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message, message._data.notifyName)
+            : filterMessage.keyMessage === "imgGemini" && message.type === "image"
+              ? await SelectedMenu[filterMessage.keyMessage](
+                filterMessage.message,
+                mediaFile.data,
+                mediaFile.mimetype,
+                number
+              )
+              : filterMessage.keyMessage === "sticker"
+                ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
+                : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
       if (filterMessage.keyMessage === "sticker") {
         const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
