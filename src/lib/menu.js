@@ -1,4 +1,5 @@
 export const menu = new Set([
+  ".menu",
   ".help",
   ".ai",
   ".gemini",
@@ -6,5 +7,6 @@ export const menu = new Set([
   ".owner",
   ".sticker",
   ".ytmp3",
-  ".unsplash"
+  ".unsplash",
+  ".ytvoice"
 ]);
