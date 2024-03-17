@@ -2,6 +2,7 @@ import { openAI } from "./system/openAi.js";
 import { geminiAI } from "./system/geminiAi.js";
 import { geminiImageAi } from "./system/geminiImage.js";
 import { searchImagesUnsplash } from "./system/searchImageUnsplash.js";
+import { lyricMusicUrl } from "./system/lyricMusicUrl.js";
 
 export const SelectedMenu = {
   menu: function (message, username) {
@@ -19,6 +20,7 @@ export const SelectedMenu = {
         "*.ytmp3 =* _Youtube Convert MP3_\n" +
         "*.ytvoice =* _Youtube Convert Voice_\n" +
         "*.unsplash =* _Search Image Unsplash_\n" +
+        "*.lyricmusic =* _Search Lyric Music_\n" +
         "*.imganime =* _Coming Soon_\n" +
         "―――――――――――――――\n"
       );
@@ -37,6 +39,7 @@ export const SelectedMenu = {
         "*.ytmp3 =* _Link_\n" +
         "*.ytvoice =* _Link_\n" +
         "*.unsplash =* _Teks_\n" +
+        "*.lyricmusic =* _Teks_\n" +
         "――――――――――――――\n"
       );
     }
@@ -122,6 +125,14 @@ export const SelectedMenu = {
         sendAudioAsVoice: true,
       };
       return object;
+    }
+  },
+
+  lyricmusic: async function (message) {
+    if (message.length !== 0) {
+      const lyricMusic = await lyricMusicUrl(message)
+
+      return lyricMusic
     }
   }
 };
