@@ -88,6 +88,7 @@ Fitur yang tersedia pada IBot-WhatsApp
 | Youtube convert MP3   |:white_check_mark:|
 | Youtube convert Voice |:white_check_mark:|
 | Search Image Unsplash |:white_check_mark:|
+| Search Music Lyrics   |:white_check_mark:|
 | Youtube convert MP4   |:x:               |
 
 
