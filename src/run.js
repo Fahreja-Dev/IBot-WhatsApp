@@ -12,6 +12,7 @@ import { IBotMp3 } from "./lib/system/ytmp3.js";
 import { videoSticker } from "./lib/system/videoSticker.js";
 import { requestUrlUnsplash } from "./lib/system/searchImageUnsplash.js";
 import { ytVoice } from "./lib/system/ytVoice.js";
+import { lyricMusic } from "./lib/system/lyricMusic.js";
 
 const { MessageMedia } = messageMedia;
 
@@ -102,6 +103,8 @@ client.on("message", async (message) => {
         await requestUrlUnsplash(message, outputMessage)
       } else if (filterMessage.keyMessage === "ytvoice") {
         await ytVoice(message, filterMessage.message, outputMessage)
+      } else if (filterMessage.keyMessage === "lyricmusic") {
+        await lyricMusic(message, outputMessage)
       }
 
       if (filterMessage.keyMessage === "imgGemini") {
