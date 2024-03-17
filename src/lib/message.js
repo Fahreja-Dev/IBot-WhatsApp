@@ -20,7 +20,7 @@ export const SelectedMenu = {
         "*.ytmp3 =* _Youtube Convert MP3_\n" +
         "*.ytvoice =* _Youtube Convert Voice_\n" +
         "*.unsplash =* _Search Image Unsplash_\n" +
-        "*.lyricmusic =* _Search Lyric Music_\n" +
+        "*.lyricmusic =* _Search Music Lyrics_\n" +
         "*.imganime =* _Coming Soon_\n" +
         "―――――――――――――――\n"
       );
