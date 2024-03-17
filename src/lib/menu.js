@@ -8,5 +8,6 @@ export const menu = new Set([
   ".sticker",
   ".ytmp3",
   ".unsplash",
-  ".ytvoice"
+  ".ytvoice",
+  ".lyricmusic"
 ]);
