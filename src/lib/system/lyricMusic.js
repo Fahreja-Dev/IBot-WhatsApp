@@ -1,5 +1,7 @@
-import request from "request";
 import messageMedia from "whatsapp-web.js"
+import axios from "axios";
+import { proxy } from "../../proxy.js"
+import { socksProxy } from "./socksProxy.js"
 
 const { MessageMedia } = messageMedia
 
@@ -67,28 +69,26 @@ async function searchLyricMusic(string) {
 }
 
 export async function lyricMusic(message, object) {
-    const requestUrl = request.defaults({ body: null })
+
     if (object) {
-        requestUrl.get(object.uriLyric, async (error, response, body) => {
-            if (response.statusCode === 200) {
-                const lyric = await searchLyricMusic(body)
-                const media = new MessageMedia("image/jpeg", object.imageBase64)
+        try {
+            const client = axios.create(socksProxy(proxy, object.lyric));
+            const page = await client({ method: "GET" })
+            const lyric = await searchLyricMusic(page.data)
+            const media = new MessageMedia("image/jpeg", object.image)
 
-                await message.reply(media, message.from, {
-                    caption:
-                        "> Grup Musik : " + object.groupMusic + "\n" +
-                        "> Judul : " + object.title + "\n\n" +
-                        "―――――[ LIRIK ]―――――\n" +
-                        lyric +
-                        "\n\n――――――――――――――"
-                })
-
-            } else if (response.statusCode === 404) {
-                await message.reply("Tidak dapat menemukan yang kamu cari!")
-            } else {
-                console.log(`Error: ${error}`)
-            }
-        })
+            await message.reply(media, message.from, {
+                caption:
+                    "> Grup Musik : " + object.groupMusic + "\n" +
+                    "> Judul : " + object.title + "\n" +
+                    "> Dirilis : " + object.rilis + "\n\n" +
+                    "―――――[ LIRIK ]―――――\n" +
+                    lyric +
+                    "\n\n――――――――――――――"
+            })
+        } catch (err) {
+            await message.reply("Fitur Lyric Music tidak dapat di akses, silahkan hubungi owner!")
+        }
     } else {
         await message.reply("Lirik lagu tidak ditemukan!")
     }
