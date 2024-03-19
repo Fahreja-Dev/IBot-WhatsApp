@@ -1,97 +1,63 @@
-import request from "request";
+import axios from "axios";
 import { manageBot } from "../../config.js";
 
-function IBotLyricUrl(path) {
-    const search = new RegExp(/\"url\":.+?,/, "g")
-    const filterMatch = path.match(search)
-    return filterMatch.map((value) => {
-        const mapSearch = new RegExp(/artists|instrumental|edm|acoustic|tropical|holiday|Genius/, "g")
-        const mapMatch = value.match(mapSearch)
-        let result = ''
-
-        if (!(mapMatch)) {
-            result += value
-        }
-        return result
-
-    })
-}
-
-function IBotLyricTitle(url) {
-    const search = new RegExp(/\"title\":.+?,/, "g")
-    const filterMatch = url.match(search)
-
-    return filterMatch.map((value) => {
-        const mapSearch = new RegExp(/Discography|Álbumes|Instrumental|EDM Remix|Acoustic Remix|Tropical Remix|Holiday Remix|Album|Collection|Live|Release/, "g")
-        const mapMatch = value.match(mapSearch)
-        let result = ''
-
-        if (!(mapMatch)) {
-            result += value
-        }
-        return result
-    })
-}
-
-function IBotLyricGroupMusic(string) {
-    const search = new RegExp(/\"artist_names\":.+?,/, "g")
-    const filterMatch = string.match(search)
-
-    return filterMatch[0].replace(/\"artist_names\":\"|\",/g, '')
-}
-
-function IBotLyricUrlImage(string) {
-    const search = new RegExp(/\"song_art_image_url\":.+?,/)
-    const filterMatch = string.match(search)
-
-    const uriImage = filterMatch[0].replace(/\"song_art_image_url\":\"|\",/g, '')
-    const requestUrl = request.defaults({ encoding: null });
-    return new Promise((resolve, reject) => {
-        requestUrl.get(uriImage, (error, response, body) => {
-            if (response.toJSON().statusCode === 200) {
-                resolve(Buffer.from(body).toString("base64"))
-            }
-            reject(`Error: ${error}`)
-        })
-    })
-
-}
-
-function validation(url, name) {
-    for (const data of url) {
-        if (data.length > 0) {
-            const search = new RegExp(`"${name}":"|",`, "g")
-            return data.replace(search, '')
-        }
+function month(number) {
+    const month = {
+        1: "Januari",
+        2: "Februari",
+        3: "Maret",
+        4: "April",
+        5: "Mei",
+        6: "Juni",
+        7: "Juli",
+        8: "Agustus",
+        9: "September",
+        10: "Oktober",
+        11: "November",
+        12: "Desember"
     }
+
+    return month[number]
+}
+
+async function getImage(url) {
+    const response = await axios({
+        url,
+        method: 'GET',
+        responseType: 'arraybuffer'
+    })
+
+    return response.data.toString("base64")
 }
 
 export async function lyricMusicUrl(user) {
-    return new Promise((resolve, reject) => {
-        request.get(`https://api.genius.com/search?q=${encodeURIComponent(user)}`, {
-            auth: {
-                bearer: manageBot.accessTokenLyricMusic
-            }
-        }, async (error, response, body) => {
+    try {
+        const url = `https://api.genius.com/search?q=${encodeURIComponent(user)}`
+        const response = await axios({
+            url,
+            method: "GET",
+            headers: { "Authorization": "Bearer " + manageBot.accessTokenLyricMusic }
+        })
 
-            if (response.toJSON().statusCode === 200) {
-                if (body.length >= 47) {
-                    const information = {
-                        groupMusic: IBotLyricGroupMusic(body),
-                        title: validation(IBotLyricTitle(body), "title"),
-                        uriLyric: validation(IBotLyricUrl(body), "url"),
-                        imageBase64: await IBotLyricUrlImage(body)
-                    }
-                    resolve(information)
-                } else {
-                    resolve(false)
+        if (response.data.meta.status === 200) {
+            if (response.data.response.hits[0] !== undefined) {
+
+                const information = {
+                    groupMusic: response.data.response.hits[0].result.primary_artist.name,
+                    title: response.data.response.hits[0].result.title,
+                    rilis: `${response.data.response.hits[0].result.release_date_components.day}-${month(response.data.response.hits[0].result.release_date_components.month)}-${response.data.response.hits[0].result.release_date_components.year}`,
+                    lyric: response.data.response.hits[0].result.url,
+                    image: await getImage(response.data.response.hits[0].result.song_art_image_url)
                 }
 
-
+                return information
+            } else {
+                return false
             }
-
-            reject(`Error: ${error}`)
-        })
-    })
-
+        } else {
+            console.log("Gagal melakukan scraping!")
+        }
+    } catch (err) {
+        console.log(`Error: ${error}`)
+    }
 }
