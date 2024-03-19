@@ -58,6 +58,6 @@ export async function lyricMusicUrl(user) {
             console.log("Gagal melakukan scraping!")
         }
     } catch (err) {
-        console.log(`Error: ${error}`)
+        console.log(`Error: ${err}`)
     }
 }
