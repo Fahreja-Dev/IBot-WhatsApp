@@ -11,7 +11,7 @@ export async function geminiAI(message, number = 0) {
     let responseUser = await Promise.all(message);
 
     for (const x of responseUser) {
-      resultUser += await x;
+      resultUser += x;
     }
 
     const api = switchApiGeminiAi(
@@ -31,15 +31,15 @@ export async function geminiAI(message, number = 0) {
 
         let text = "";
         for await (const chunk of result.stream) {
-          const chunkText = await chunk.text();
-          text += await chunkText;
+          const chunkText = chunk.text();
+          text += chunkText;
         }
 
         let outputResult = "";
         let outputResponse = await Promise.all(text);
 
-        for await (const y of outputResponse) {
-          outputResult += await y;
+        for (const y of outputResponse) {
+          outputResult += y;
         }
 
         return outputResult;
