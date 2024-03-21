@@ -13,6 +13,7 @@ export const SelectedMenu = {
         "> Silahkan Ketik: .help\n\n" +
         "―――――[ MENU ]―――――\n" +
         "*.owner =* _Pembuat Bot_\n" +
+        "*.donate =* _Donasi Untuk Dukungan Owner_\n" +
         "*.ai =* _OpenAI_\n" +
         "*.gemini =* _GeminiAI_\n" +
         "*.imgGemini =* _GeminiAI Mengenali Objek Gambar_\n" +
@@ -40,6 +41,16 @@ export const SelectedMenu = {
         "*.ytvoice =* _Link_\n" +
         "*.unsplash =* _Teks_\n" +
         "*.lyricmusic =* _Teks_\n" +
+        "――――――――――――――\n"
+      );
+    }
+  },
+
+  donate: function (message) {
+    if (message.length === 0) {
+      return (
+        "―――――[ DONASI ]―――――\n" +
+        "*Saweria :* _https://saweria.co/FahrejaDev_\n" +
         "――――――――――――――\n"
       );
     }
