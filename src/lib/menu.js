@@ -9,5 +9,6 @@ export const menu = new Set([
   ".ytmp3",
   ".unsplash",
   ".ytvoice",
-  ".lyricmusic"
+  ".lyricmusic",
+  ".donate"
 ]);
