@@ -94,7 +94,7 @@ client.on("message", async (message) => {
                 ? await SelectedMenu[filterMessage.keyMessage](filterMessage.message)
                 : await SelectedMenu[filterMessage.keyMessage](filterMessage.message);
 
-      if (filterMessage.keyMessage === "sticker") {
+      if (filterMessage.keyMessage === "sticker" && message.type === "image") {
         const media = new MessageMedia(mediaFile.mimetype, mediaFile.data);
         if (message.type === "image") {
           await sticker(filterMessage.message, message, media, outputMessage);
