@@ -1,4 +1,4 @@
-import { multiApiOpenAi, multiApiGeminiAi } from "../multiApi.js";
+import { multiApi } from "../multiApi.js";
 
 export const listAi = {
   ai: "ai",
@@ -6,7 +6,7 @@ export const listAi = {
 };
 
 export const listObjectAi = {
-  ai: multiApiOpenAi,
-  gemini: multiApiGeminiAi,
-  imgGemini: multiApiGeminiAi,
+  ai: multiApi.openAi,
+  gemini: multiApi.geminiAi,
+  imgGemini: multiApi.geminiAi,
 };

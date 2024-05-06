@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { manageBot } from "../../config.js";
-import { multiApiGeminiAi } from "../../multiApi.js";
+import { config } from "../../config.js";
+import { multiApi } from "../../multiApi.js";
 import { multiGeminiAi, switchApiGeminiAi } from "./multiGeminiAi.js";
 
 function fileToGenerativePart(base64Image, mimeType) {
@@ -27,9 +27,9 @@ export async function geminiImageAi(
     }
 
     const api = switchApiGeminiAi(
-      manageBot,
-      multiGeminiAi(multiApiGeminiAi, number, manageBot.multiApiKeyGemini),
-      manageBot.multiApiKeyGemini
+      config.geminiAi,
+      multiGeminiAi(multiApi.geminiAi, number, config.geminiAi.multiApi),
+      config.geminiAi.multiApi
     );
     for (const resultApi of Object.values(api)) {
       if (resultApi !== undefined) {

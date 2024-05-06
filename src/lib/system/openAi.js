@@ -1,19 +1,19 @@
 import OpenAI from "openai";
-import { manageBot } from "../../config.js";
+import { config } from "../../config.js";
 import { multiOpenAi, switchApiOpenAi } from "./multiOpenAi.js";
-import { multiApiOpenAi } from "../../multiApi.js";
+import { multiApi } from "../../multiApi.js";
 
 export async function openAI(message, number = 0) {
   try {
     const api = switchApiOpenAi(
-      manageBot,
-      multiOpenAi(multiApiOpenAi, number, manageBot.multiApiKey),
-      manageBot.multiApiKey
+      config.openAi,
+      multiOpenAi(multiApi.openAi, number, config.openAi.multiApi),
+      config.openAi.multiApi
     );
 
     const openai = new OpenAI({
-      organization: api.organizationOpenAi,
-      apiKey: api.apiKeyOpenAi,
+      organization: api.organization,
+      apiKey: api.apiKey,
     });
 
     let resultUser = "";

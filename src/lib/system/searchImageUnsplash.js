@@ -1,5 +1,5 @@
 import { createApi } from 'unsplash-js';
-import { manageBot } from "../../config.js";
+import { config } from "../../config.js";
 import request from 'request';
 import messageMedia from "whatsapp-web.js";
 const { MessageMedia } = messageMedia;
@@ -17,7 +17,7 @@ function randomNumber(min, max) {
 export async function searchImagesUnsplash(message) {
     try {
         const unsplash = createApi({
-            accessKey: manageBot.accessKeyUnsplash
+            accessKey: config.unsplash.accessKey
         })
 
         let search = await unsplash.search.getPhotos({

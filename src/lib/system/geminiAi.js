@@ -1,9 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { manageBot } from "../../config.js";
-import { multiApiGeminiAi } from "../../multiApi.js";
+import { config } from "../../config.js";
+import { multiApi } from "../../multiApi.js";
 import { multiGeminiAi, switchApiGeminiAi } from "./multiGeminiAi.js";
 
-// Access your API key as an environment variable (see "Set up your API key" above)
 
 export async function geminiAI(message, number = 0) {
   try {
@@ -15,14 +14,15 @@ export async function geminiAI(message, number = 0) {
     }
 
     const api = switchApiGeminiAi(
-      manageBot,
-      multiGeminiAi(multiApiGeminiAi, number, manageBot.multiApiKeyGemini),
-      manageBot.multiApiKeyGemini
+      config.geminiAi,
+      multiGeminiAi(multiApi.geminiAi, number, config.geminiAi.multiApi),
+      config.geminiAi.multiApi
     );
+
     for (const resultApi of Object.values(api)) {
       if (resultApi !== undefined) {
         const genAI = new GoogleGenerativeAI(resultApi);
-        // For text-only input, use the gemini-pro model
+
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
         const prompt = resultUser;

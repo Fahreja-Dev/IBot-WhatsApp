@@ -4,7 +4,7 @@ import { filtersMessage } from "./lib/system/filterMessage.js";
 import qrcode from "qrcode-terminal";
 import { Client } from "whatsapp-web.js";
 import { formatMessage } from "./lib/system/formatMessage.js";
-import { manageBot } from "./config.js";
+import { config } from "./config.js";
 import messageMedia from "whatsapp-web.js";
 import { sticker } from "./lib/system/sticker.js";
 import { listAi, listObjectAi } from "./lib/ai.js";
@@ -64,7 +64,7 @@ client.on("message", async (message) => {
       const mediaFile = await message.downloadMedia();
       if (
         listObjectAi.hasOwnProperty(filterMessage.keyMessage) &&
-        manageBot.multiApiKey
+        config.openAi.multiApi
       ) {
         if (
           number ===
@@ -76,8 +76,7 @@ client.on("message", async (message) => {
       }
 
       const outputMessage =
-        filterMessage.keyMessage === listAi[filterMessage.keyMessage] &&
-          manageBot.multiApiKey
+        filterMessage.keyMessage === listAi[filterMessage.keyMessage]
           ? await SelectedMenu[filterMessage.keyMessage]([
             number,
             filterMessage.message,

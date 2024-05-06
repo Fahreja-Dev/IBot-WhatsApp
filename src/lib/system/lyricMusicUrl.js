@@ -1,5 +1,5 @@
 import axios from "axios";
-import { manageBot } from "../../config.js";
+import { config } from "../../config.js";
 
 function month(number) {
     const month = {
@@ -36,7 +36,7 @@ export async function lyricMusicUrl(user) {
         const response = await axios({
             url,
             method: "GET",
-            headers: { "Authorization": "Bearer " + manageBot.accessTokenLyricMusic }
+            headers: { "Authorization": "Bearer " + config.lyricMusic.accessToken }
         })
 
         if (response.data.meta.status === 200) {

@@ -3,8 +3,8 @@ export function multiOpenAi(api, number, condition) {
     const randomApi = api[`api${number}`];
 
     const resultApi = {
-      apiKeyOpenAi: randomApi[0],
-      organizationOpenAi: randomApi[1],
+      apiKey: randomApi[0],
+      organization: randomApi[1],
     };
 
     return resultApi;
