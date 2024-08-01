@@ -18,7 +18,7 @@
     "socks-proxy-agent": "^8.0.2",
     "stream": "^0.0.2",
     "unsplash-js": "^7.0.19",
-    "whatsapp-web.js": "^1.23.0",
+    "whatsapp-web.js": "^1.25.0",
     "ytdl-core": "^4.11.5"
   },
   "scripts": {
